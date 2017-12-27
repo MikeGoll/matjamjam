@@ -21,6 +21,10 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+	}
+
+	public void runPatrol(){
 		if(!agent.pathPending && agent.remainingDistance < 0.8f){
 			goToNextPoint();
 		}
@@ -31,7 +35,6 @@ public class EnemyMovement : MonoBehaviour {
 			Debug.Log("No Patrol");
 			return;
 		}
-
 
 		agent.destination = patrol[destPoint].transform.position;
 
