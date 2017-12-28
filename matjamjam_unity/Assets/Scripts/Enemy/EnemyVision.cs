@@ -30,12 +30,9 @@ public class EnemyVision : MonoBehaviour {
 		float angle = Vector3.Angle(direction, transform.forward);
 		if(angle < fieldOfView * 0.5f){
 			RaycastHit hit = Utilities.raycastWrap(transform.position, direction, col.radius);
-			if(hit.collider != null){
-				if(hit.collider.gameObject == player){
-					playerSpotted = true;
-				}
+			if(hit.collider.gameObject == player){
+				playerSpotted = true;
 			}
-
 		}
 	}
 
