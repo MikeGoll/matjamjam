@@ -27,9 +27,14 @@ public class EnemyAI : MonoBehaviour {
 					enemyMovement.startMoving();
 					enemyMovement.chasePlayer();
 				} else {
+
 					enemyMovement.facePlayer();
 					enemyMovement.stopMoving();
 					enemyAnimator.playAttackAnimation();
+					
+					if(enemyVision.checkPlayerDistance()){
+						//do damage to player
+					}
 				}
 				attacking = enemyVision.checkPlayerDistance();
 			} else {
