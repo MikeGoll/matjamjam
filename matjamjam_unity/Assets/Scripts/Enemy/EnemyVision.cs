@@ -43,7 +43,6 @@ public class EnemyVision : MonoBehaviour {
 	public bool checkPlayerDistance(){
 		Vector3 direction = player.transform.position - transform.position;
 		RaycastHit hit = Utilities.raycastWrap(transform.position, direction, col.radius + 5);
-		Debug.Log(hit.distance + " dis");
 		if(hit.distance > col.radius){
 			playerSpotted = false;
 		} else if (hit.distance < 3) {
