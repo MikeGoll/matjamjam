@@ -35,7 +35,6 @@ public class EnemyVision : MonoBehaviour {
 					playerSpotted = true;
 				}
 			}
-
 		}
 	}
 

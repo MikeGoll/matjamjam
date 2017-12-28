@@ -6,6 +6,7 @@ public class EnemyAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	private Animator anim;
+	private bool attacked;
 	void Start () {
 		anim = GetComponent<Animator>();
 	}
@@ -20,10 +21,28 @@ public class EnemyAnimator : MonoBehaviour {
 	}
 
 	public void playAttackAnimation(){
-		anim.Play("Attack01");
+		if (!attacked){
+			Debug.Log("HEre");
+			anim.Play("Attack01");
+		}
 	}
 
+	public void playIdleAnimation(){
+		anim.Play("Idle");
+	}
 	public void playDeathAnimation(){
 		anim.Play("Die");
+	}
+
+	public void takeDamageAnimation() {
+		attacked = true;
+		anim.StopPlayback();
+		StartCoroutine (InvulWait ());
+	}
+
+	 private IEnumerator InvulWait() {
+		anim.Play("GetHit");
+		yield return new WaitForSeconds (1.33f); //invul time
+		attacked = false;
 	}
 }

@@ -12,4 +12,8 @@ public class Utilities : MonoBehaviour {
 		}
 		return hit;
 	}
+
+	public static void playAnimation(Animator anim, string animation) {
+		anim.Play(animation);
+	}
 }

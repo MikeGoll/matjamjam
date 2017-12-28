@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 cameraPos;
 
 	private Animator anim;
+	private EnemyAI enemyAI;
+	private float timeSinceLastAttack;
+	private float attackDuration;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 		moveDirection = Vector3.zero;
 		cameraPos = new Vector3(.66f, 10.5f, 6.5f);
 		anim = GetComponent<Animator>();
+		attackDuration = 1.33f;
 	}
 	
 	void Update () {
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D)) {
-				playAnimation("Idle");
+				Utilities.playAnimation(anim, "Idle");
 			}
 		}
 
@@ -82,28 +86,38 @@ public class PlayerController : MonoBehaviour {
 
 	private void checkAttack() {
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-			playAnimation("Attack01");
+
+			float tempTime = Time.time;
+
+			if (timeSinceLastAttack + attackDuration < tempTime) {
+				timeSinceLastAttack = tempTime;
+				
+				//start attack animation and wait a little bit
+				Utilities.playAnimation(anim, "Attack01");
+				StartCoroutine(attackWait());
+			}
 		}
 	}
 
 	private void checkSprint() {
 		if (sprinting)
-			playAnimation("Run");
+			Utilities.playAnimation(anim, "Run");
 		else
-			playAnimation("Walk");
+			Utilities.playAnimation(anim, "Walk");
 	}
 
-	private void playAnimation(string animation) {
-		anim.Play(animation);
+	private IEnumerator attackWait() {
+		yield return new WaitForSeconds (.33f);
+		Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
+		RaycastHit temp = Utilities.raycastWrap(transform.position, forward, 3);
+		
+		if (temp.collider != null) {
+			if (temp.collider.gameObject.tag == "Enemy") {
+				temp.collider.gameObject.GetComponent<EnemyAI>().decrementHealth();
+				temp.collider.gameObject.GetComponent<EnemyAnimator>().takeDamageAnimation();
+			}
+		}
 	}
-
-	private IEnumerator WaitForAnimation ( Animation animation )
-{
-    do
-    {
-        yield return null;
-    } while ( animation.isPlaying );
-}
 }
 
 
