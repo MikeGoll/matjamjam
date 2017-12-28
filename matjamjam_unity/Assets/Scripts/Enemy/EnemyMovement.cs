@@ -11,12 +11,15 @@ public class EnemyMovement : MonoBehaviour {
 	public Transform[] patrol;
 	private NavMeshAgent agent;
 	private bool chasingPlayer = false;
+
+	private GameObject player;
 	
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
 		agent.autoBraking = false;
 		destPoint = 0;
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -44,5 +47,9 @@ public class EnemyMovement : MonoBehaviour {
 		} else {
 			destPoint = 0;
 		}
+	}
+
+	public void chasePlayer(){
+		agent.destination = player.transform.position;
 	}
 }

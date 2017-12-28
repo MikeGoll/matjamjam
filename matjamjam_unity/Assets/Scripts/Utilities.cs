@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Utilities : MonoBehaviour {
 
-	public static bool raycastWrap(Vector3 position, Vector3 direction, float distance, GameObject target) {
+	public static RaycastHit raycastWrap(Vector3 position, Vector3 direction, float distance) {
 		RaycastHit hit;
 		Debug.DrawRay(position, direction, Color.red);
 		if(Physics.Raycast(position, direction, out hit, distance)){
-			if(hit.collider.gameObject == target){
-				return true;
-			}
+			return hit;
 		}
-		return false;
+		return hit;
 	}
 }
