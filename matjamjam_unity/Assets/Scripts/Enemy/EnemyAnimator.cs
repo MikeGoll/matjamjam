@@ -19,7 +19,11 @@ public class EnemyAnimator : MonoBehaviour {
 		anim.Play("Run");
 	}
 
-		public void playAttackAnimation(){
+	public void playAttackAnimation(){
 		anim.Play("Attack01");
+	}
+
+	public void playDeathAnimation(){
+		anim.Play("Die");
 	}
 }
