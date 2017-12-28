@@ -21,10 +21,15 @@ public class EnemyAnimator : MonoBehaviour {
 	}
 
 	public void playAttackAnimation(){
-		if (!attacked)
+		if (!attacked){
+			Debug.Log("HEre");
 			anim.Play("Attack01");
+		}
 	}
 
+	public void playIdleAnimation(){
+		anim.Play("Idle");
+	}
 	public void playDeathAnimation(){
 		anim.Play("Die");
 	}
