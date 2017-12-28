@@ -17,11 +17,7 @@ public class EnemyVision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(playerSpotted){
-			//check if player is still in sight
-		}
 	}
-
 
 	void OnTriggerStay(Collider other) {
 		if(other.gameObject == player){
@@ -30,10 +26,8 @@ public class EnemyVision : MonoBehaviour {
 	}
 
 	public void checkVisionCone(){
-
 		Vector3 direction = player.transform.position - transform.position;
 		float angle = Vector3.Angle(direction, transform.forward);
-		Debug.Log("Ang " + angle + " fieldview " + fieldOfView);
 		if(angle < fieldOfView * 0.5f){
 			RaycastHit hit = Utilities.raycastWrap(transform.position, direction, col.radius);
 			if(hit.collider.gameObject == player){
@@ -46,11 +40,17 @@ public class EnemyVision : MonoBehaviour {
 		return playerSpotted;
 	}
 
-	public void checkPlayerDistance(){
+	public bool checkPlayerDistance(){
 		Vector3 direction = player.transform.position - transform.position;
 		RaycastHit hit = Utilities.raycastWrap(transform.position, direction, col.radius + 5);
+		Debug.Log(hit.distance + " dis");
 		if(hit.distance > col.radius){
 			playerSpotted = false;
+		} else if (hit.distance < 2) {
+			//Stop Walking
+			//attack player
+			return true;
 		}
+		return false;
 	}
 }

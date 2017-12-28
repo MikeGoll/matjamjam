@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour {
 	void Update () {
 		if(enemyVision.seesPlayer()){
 			enemyMovement.chasePlayer();
+			enemyVision.checkPlayerDistance();
 		} else {
 			enemyMovement.runPatrol();
 		}
