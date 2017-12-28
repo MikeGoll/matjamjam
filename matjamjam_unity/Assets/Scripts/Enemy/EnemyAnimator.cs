@@ -18,4 +18,8 @@ public class EnemyAnimator : MonoBehaviour {
 	public void playRunAnimation(){
 		anim.Play("Run");
 	}
+
+		public void playAttackAnimation(){
+		anim.Play("Attack01");
+	}
 }

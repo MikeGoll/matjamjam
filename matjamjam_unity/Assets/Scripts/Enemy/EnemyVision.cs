@@ -46,7 +46,7 @@ public class EnemyVision : MonoBehaviour {
 		Debug.Log(hit.distance + " dis");
 		if(hit.distance > col.radius){
 			playerSpotted = false;
-		} else if (hit.distance < 2) {
+		} else if (hit.distance < 3) {
 			//Stop Walking
 			//attack player
 			return true;

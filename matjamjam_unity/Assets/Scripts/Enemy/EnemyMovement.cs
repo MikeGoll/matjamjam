@@ -52,4 +52,21 @@ public class EnemyMovement : MonoBehaviour {
 	public void chasePlayer(){
 		agent.destination = player.transform.position;
 	}
+
+	public void stopMoving(){
+		agent.isStopped = true;
+
+	}
+
+	public void startMoving(){
+		agent.isStopped = false;
+	}
+
+	public void facePlayer(){
+		Vector3 targetDir = player.transform.position - transform.position;
+        float step =  4 * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        Debug.DrawRay(transform.position, newDir, Color.red);
+        transform.rotation = Quaternion.LookRotation(newDir);
+	}
 }
