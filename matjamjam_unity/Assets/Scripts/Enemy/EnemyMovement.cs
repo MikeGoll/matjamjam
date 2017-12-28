@@ -65,7 +65,7 @@ public class EnemyMovement : MonoBehaviour {
 	public void facePlayer(){
 		Vector3 targetDir = player.transform.position - transform.position;
         float step =  4 * Time.deltaTime;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, new Vector3(targetDir.x, 0, targetDir.z), step, 0.0F);
         Debug.DrawRay(transform.position, newDir, Color.red);
         transform.rotation = Quaternion.LookRotation(newDir);
 	}
