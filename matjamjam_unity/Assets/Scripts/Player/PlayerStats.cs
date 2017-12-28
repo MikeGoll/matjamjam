@@ -25,4 +25,8 @@ public class PlayerStats : MonoBehaviour {
 			dead = true;
 		}
 	}
+
+	public void getHealth(){
+		
+	}
 }
